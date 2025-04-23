@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RubieScript : MonoBehaviour
+public class FlyingMonsterScript : MonoBehaviour
 {
-    public int rubieValue;
-
     // Start is called before the first frame update
     void Start()
     {
