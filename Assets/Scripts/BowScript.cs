@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BowScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.GetComponent<HeroController>())
+        {
+            other.GetComponent<HeroController>().gotBow = true;
+            Destroy(gameObject);
+        }
     }
 }
