@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ChestScript : MonoBehaviour
 {
+
+    public GameObject itemInChest;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,13 @@ public class ChestScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<HeroController>())
+        {
+            GameObject projectile = Instantiate(itemInChest, new Vector3(0,1,0), itemInChest.transform.rotation);
+        }
     }
 }
