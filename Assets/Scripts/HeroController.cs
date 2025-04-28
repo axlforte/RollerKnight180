@@ -14,17 +14,20 @@ public class HeroController : MonoBehaviour
     public GameObject LockOnTarget;
     public Interactible inter;
     public bool Aiming;
-    public KeyCode Jumping, Item1, Item2, Interact, Sword;
+    public KeyCode Jumping, Item1, Item2, Interact, SwingSword;
     [Header("Camera Data")]
     public float rotIntensity;
     public KeyCode UpCam, DownCam, LeftCam, RightCam;
-    public Transform PlayerModel, cam;
+    public Transform PlayerModel, cam, camPivot;
     public Quaternion cameraRot;
     [Header("Item Data")]
 
     public int swordPower;
+    public GameObject Sword;
     public bool gotBoomer;
+    public GameObject boomerangPrefab;
     public bool gotBow;
+    public GameObject arrowPrefab;
     public int basicKeys;
     public int health;// per quarter heart
 
@@ -53,6 +56,10 @@ public class HeroController : MonoBehaviour
         Move();
         Interaction();
         PositionCamera();
+        if(gotBow || 1 == 1)
+        {
+            Bow();
+        }
     }
 
     private bool GetGrounded()
@@ -70,7 +77,6 @@ public class HeroController : MonoBehaviour
         //the player will not move when aiming. locking on takes priority.
         } else if (Aiming)
         {
-            Debug.Log("nop");
         //otherwise you are walking normally. rotate towards movement direction, not target.
         } else
         {
@@ -90,15 +96,50 @@ public class HeroController : MonoBehaviour
     //moves the camera to the player, rotates to its rotation, then moves back a certain amount
     private void PositionCamera()
     {
+        bool up = false;
+        bool down = false;
+        bool left = Input.GetKey(LeftCam);
+        bool right = Input.GetKey(RightCam);
+
+        if (cameraRot.eulerAngles.x < 89 || cameraRot.eulerAngles.x > 271)
+        {
+            up = Input.GetKey(UpCam);
+            down = Input.GetKey(DownCam);
+        }
+        else { 
+            if(cameraRot.eulerAngles.x > 180)
+            {
+                cameraRot = Quaternion.Euler(
+                    cameraRot.eulerAngles.x+1,
+                    cameraRot.eulerAngles.y,
+                    cameraRot.eulerAngles.z);
+            } else
+            {
+                cameraRot = Quaternion.Euler(
+                    cameraRot.eulerAngles.x-1,
+                    cameraRot.eulerAngles.y,
+                    cameraRot.eulerAngles.z);
+            }
+        }
+
+        Debug.Log(cameraRot.eulerAngles.x);
 
         //move the camera in relation to 
         cameraRot = Quaternion.Euler(
-            cameraRot.eulerAngles.x + (BoolToInt(Input.GetKey(DownCam))) - (BoolToInt(Input.GetKey(UpCam))), 
-            cameraRot.eulerAngles.y + (BoolToInt(Input.GetKey(LeftCam))) - (BoolToInt(Input.GetKey(RightCam))), 
+            cameraRot.eulerAngles.x + (BoolToInt(down)) - (BoolToInt(up)), 
+            cameraRot.eulerAngles.y + (BoolToInt(right)) - (BoolToInt(left)), 
             cameraRot.eulerAngles.z);
 
-        cam.position = PlayerModel.position;
-        cam.rotation = cameraRot;
+        camPivot.position = PlayerModel.position;
+        camPivot.rotation = cameraRot;
+        if (Aiming)
+        {
+            cam.localPosition = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            cam.localPosition = new Vector3(0, 0, -10);
+        }
         //this lags the fuck out of my computer. optimize or get rid of bloatware i guess
 
     }
@@ -159,6 +200,40 @@ public class HeroController : MonoBehaviour
         {
             Debug.Log("jumped!");
             RB.AddForce(Vector3.up * jumpForce);
+        }
+    }
+
+    //activates the sword hitbox, moves it in a horiz swipe, then disables the hitbox
+    private void swordSwing()
+    {
+        //hehe timer?
+    }
+
+    //item1 is bow
+    private void Bow()
+    {
+        if (Input.GetKeyDown(Item1))
+        {
+            Aiming = true;
+        }
+        else if (Input.GetKeyUp(Item1))
+        {
+            Aiming = false;
+            Instantiate(arrowPrefab, transform.position + Vector3.up, Quaternion.Euler(cam.transform.rotation.eulerAngles.x / 2, cam.transform.rotation.eulerAngles.y / 2, cam.transform.rotation.eulerAngles.z));
+        }
+    }
+
+    //item2 is boomerang
+    private void Boomerang()
+    {
+        if (Input.GetKeyDown(Item2))
+        {
+            Aiming = true;
+        }
+        else if (Input.GetKeyUp(Item2))
+        {
+            Aiming = false;
+            Instantiate(boomerangPrefab, transform.position + Vector3.up, Quaternion.Euler(cam.transform.rotation.eulerAngles.x / 2, cam.transform.rotation.eulerAngles.y / 2, cam.transform.rotation.eulerAngles.z));
         }
     }
 

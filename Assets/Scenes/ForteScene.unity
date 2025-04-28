@@ -956,10 +956,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 589411084173685686, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2b52df30bf3e33d4580a23377e5c2fff, type: 2}
     - target: {fileID: 3208309882428679579, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1004,54 +1000,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: Item1
-      value: 114
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: Item2
-      value: 102
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: Sword
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: UpCam
-      value: 273
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: DownCam
-      value: 274
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: Jumping
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: LeftCam
-      value: 276
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: Interact
-      value: 113
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: RightCam
-      value: 275
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934421440733265116, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: jumpForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 8685793388346108295, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 13fb4224f160a5e499206e21ee1cd487, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

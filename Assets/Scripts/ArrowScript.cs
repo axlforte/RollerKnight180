@@ -13,6 +13,6 @@ public class ArrowScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(transform.forward);
     }
 }
