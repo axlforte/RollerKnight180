@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowScript : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,14 @@ public class ArrowScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.forward);
+        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 6)
+        {
+
+        }
     }
 }

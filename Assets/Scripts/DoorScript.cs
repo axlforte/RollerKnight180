@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ By Davis
+ 4/28/25
+ Door that opens when you interact while close to it
+ */
+
 public class DoorScript : Interactible
 {
     public Vector3 bottom, top;
