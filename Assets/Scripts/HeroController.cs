@@ -12,6 +12,7 @@ public class HeroController : MonoBehaviour
     public Rigidbody RB;
     public float speed, jumpForce;
     public GameObject LockOnTarget;
+    public Interactible inter;
     public bool Aiming;
     public KeyCode Jumping, Item1, Item2, Interact, Sword;
     [Header("Camera Data")]
@@ -47,18 +48,16 @@ public class HeroController : MonoBehaviour
         //you can only move around when you are grounded
         if (GetGrounded())
         {
-            Move();
             Jump();
         }
+        Move();
+        Interaction();
         PositionCamera();
     }
 
     private bool GetGrounded()
     {
-        //this is broken why 
-        //i need to do some fuckery to see whats up
-        Debug.Log(Physics.Raycast(RB.transform.position, Vector3.down, 0.01f, LM));
-        return Physics.Raycast(RB.transform.position, Vector3.down, 0.01f, LM);
+        return Physics.Raycast(RB.transform.position + new Vector3(0,1,0), Vector3.down, 1.1f, LM);
     }
 
     private void Move()
@@ -152,12 +151,25 @@ public class HeroController : MonoBehaviour
         //the returned value needs to be multiplied by 180, not 360
     }
 
+    //if the player is grounded, jump
     private void Jump()
     {
         Debug.Log("i can jump!");
         if (Input.GetKeyDown(Jumping))
         {
+            Debug.Log("jumped!");
             RB.AddForce(Vector3.up * jumpForce);
+        }
+    }
+
+    //interact with the currently availible interactible
+    //current method is ass, and does not work if you are in multiple interactible zones
+    private void Interaction()
+    {
+        if(inter != null && Input.GetKeyDown(Interact))
+        {
+            Debug.Log("Bing!");
+            inter.pinged = true;
         }
     }
 
@@ -170,6 +182,22 @@ public class HeroController : MonoBehaviour
         } else
         {
             return 0;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Interactible>())
+        {
+            inter = other.gameObject.GetComponent<Interactible>();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<Interactible>())
+        {
+            inter = null;
         }
     }
 }

@@ -151,18 +151,30 @@ MonoBehaviour:
   Left: 97
   Right: 100
   RB: {fileID: 7851115004217098046}
-  health: 32
-  speed: 1
+  speed: 6
+  jumpForce: 300
   LockOnTarget: {fileID: 0}
+  inter: {fileID: 0}
   Aiming: 0
+  Jumping: 101
+  Item1: 114
+  Item2: 102
+  Interact: 113
+  Sword: 32
   rotIntensity: 0
-  UpCam: 0
-  DownCam: 0
-  LeftCam: 0
-  RightCam: 0
+  UpCam: 273
+  DownCam: 274
+  LeftCam: 276
+  RightCam: 275
   PlayerModel: {fileID: 8425383506901493044}
   cam: {fileID: 4993973745111528406}
   cameraRot: {x: 0, y: 0, z: 0, w: 0}
+  swordPower: 0
+  gotBoomer: 0
+  gotBow: 0
+  basicKeys: 0
+  health: 32
+  arrows: 0
 --- !u!54 &7851115004217098046
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -343,7 +355,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 13fb4224f160a5e499206e21ee1cd487, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -428,7 +440,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2b52df30bf3e33d4580a23377e5c2fff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
