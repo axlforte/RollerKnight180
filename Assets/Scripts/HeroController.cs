@@ -29,6 +29,7 @@ public class HeroController : MonoBehaviour
     public bool gotBow;
     public GameObject arrowPrefab;
     public int basicKeys;
+    public int rubies;
     public int health;// per quarter heart
 
     //only if we plan on making arrows limited but I personal dont think so

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3347189977869993171}
   - component: {fileID: -1577151628359901533}
   m_Layer: 0
-  m_Name: Boomerang
+  m_Name: BoomerangPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

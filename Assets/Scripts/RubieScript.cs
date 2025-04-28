@@ -17,4 +17,15 @@ public class RubieScript : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<HeroController>())
+        {
+            other.GetComponent<HeroController>().rubies = other.GetComponent<HeroController>().rubies + rubieValue;
+            Destroy(gameObject);
+
+        }
+    }
+
 }
