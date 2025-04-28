@@ -23,7 +23,8 @@ public class ChestScript : MonoBehaviour
     {
         if(other.GetComponent<HeroController>())
         {
-            GameObject projectile = Instantiate(itemInChest, new Vector3(0,1,0), itemInChest.transform.rotation);
+            GameObject projectile = Instantiate(itemInChest, transform.position + new Vector3(0,1,0), itemInChest.transform.rotation);
+            Destroy(gameObject);
         }
     }
 }

@@ -26,6 +26,7 @@ public class HeroController : MonoBehaviour
     public bool gotBoomer;
     public bool gotBow;
     public int basicKeys;
+    public int rubies;
     public int health;// per quarter heart
 
     //only if we plan on making arrows limited but I personal dont think so
