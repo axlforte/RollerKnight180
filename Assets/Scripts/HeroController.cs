@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class HeroController : MonoBehaviour
 {
-
+    //tooltips are cool. dassit
+    [Header("Player Movement Data")]
+    [Tooltip("The physics layers that the player can interact with")]
     public LayerMask LM;
     public KeyCode Forward, Backward, Left, Right;
     public Rigidbody RB;
-    public int health;// per quarter heart
-    public float speed;
+    public float speed, jumpForce;
     public GameObject LockOnTarget;
     public bool Aiming;
+    public KeyCode Jumping, Item1, Item2, Interact, Sword;
+    [Header("Camera Data")]
     public float rotIntensity;
     public KeyCode UpCam, DownCam, LeftCam, RightCam;
     public Transform PlayerModel, cam;
     public Quaternion cameraRot;
+    [Header("Item Data")]
 
     public int swordPower;
     public bool gotBoomer;
     public bool gotBow;
     public int basicKeys;
+    public int health;// per quarter heart
 
     //only if we plan on making arrows limited but I personal dont think so
+    //jeans: we should, if people dont like it just disable it lol
     public int arrows;
 
     // Start is called before the first frame update
@@ -31,22 +37,28 @@ public class HeroController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    /* too lazy to do time.deltatime
+       so I made the default update into fixed update
+       fixedupdate triggers at 50fps afaik, so its always
+       being called in a fixed amount of time
+    */
+    void FixedUpdate()
     {
+        //you can only move around when you are grounded
         if (GetGrounded())
         {
             Move();
+            Jump();
         }
         PositionCamera();
     }
 
     private bool GetGrounded()
     {
-        //we know these raycasts always happen at the feet of the player
-        //so we can do a little itty bitty raycast
-
-        return Physics.Raycast(transform.position, Vector3.down, 0.01f, LM);
+        //this is broken why 
+        //i need to do some fuckery to see whats up
+        Debug.Log(Physics.Raycast(RB.transform.position, Vector3.down, 0.01f, LM));
+        return Physics.Raycast(RB.transform.position, Vector3.down, 0.01f, LM);
     }
 
     private void Move()
@@ -138,6 +150,15 @@ public class HeroController : MonoBehaviour
 
         return -2;
         //the returned value needs to be multiplied by 180, not 360
+    }
+
+    private void Jump()
+    {
+        Debug.Log("i can jump!");
+        if (Input.GetKeyDown(Jumping))
+        {
+            RB.AddForce(Vector3.up * jumpForce);
+        }
     }
 
     //A helper function that converts booleans to integers. I dont know if casting works and i am too lazy to check
