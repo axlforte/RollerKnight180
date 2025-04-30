@@ -21,7 +21,7 @@ public class HeroController : MonoBehaviour
     public GameObject LockOnTarget;
     public Interactible inter;
     public bool Aiming;
-    public KeyCode Jumping, Item1, Item2, Interact, SwingSword;
+    public KeyCode Jumping, Item1, Item2, Interact, SwingSword, lockOn;
     public GameObject AimingReticle;
     [Header("Camera Data")]
 
@@ -69,6 +69,7 @@ public class HeroController : MonoBehaviour
         {
             Jump();
         }
+        LockOntoEnemy();
         Move();
         Interaction();
         PositionCamera();
@@ -95,9 +96,20 @@ public class HeroController : MonoBehaviour
         //the player strafes if they are locked on, and if they are aiming
         if(LockOnTarget != null)
         {
+            float rot = Rotation();
+            if (rot != -2)
+            {
+                //RB.AddForce(RB.transform.forward * speed);
+                transform.LookAt(LockOnTarget.transform);
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+                transform.Translate(new Vector3(Mathf.Sin(rot * 180),0, Mathf.Cos(rot * 180)) * speed * Time.deltaTime);
 
-            Debug.Log("hee hee");
-        //the player will not move when aiming. locking on takes priority.
+                //why unity why
+                //the value is divided by 2 because it makes the processes work properly
+                //RB.rotation = Quaternion.Euler(0, ((rot * 180) + cameraRot.eulerAngles.y) / 2, 0);
+                //PlayerModel.localRotation = RB.rotation;
+            }
+            //the player will not move when aiming. locking on takes priority.
         } else if (Aiming) {
             RB.rotation = Quaternion.Euler(0, cam.rotation.eulerAngles.y, 0);
         //otherwise you are walking normally. rotate towards movement direction, not target.
@@ -110,8 +122,9 @@ public class HeroController : MonoBehaviour
                 transform.Translate(RB.transform.forward * speed * Time.deltaTime);
 
                 //why unity why
+                //the value is divided by 2 because it makes the processes work properly
                 RB.rotation = Quaternion.Euler(0, ((rot * 180) + cameraRot.eulerAngles.y) / 2, 0);
-                //PlayerModel.rotation = Quaternion.Euler(0, ((rot * 180) + cameraRot.eulerAngles.y) / 2, 0);
+                PlayerModel.localRotation = RB.rotation;
             }
         }
         //Debug.Log(RB.transform.forward);
@@ -120,52 +133,63 @@ public class HeroController : MonoBehaviour
     //moves the camera to the player, rotates to its rotation, then moves back a certain amount
     private void PositionCamera()
     {
-        bool up = false;
-        bool down = false;
-        bool left = Input.GetKey(LeftCam);
-        bool right = Input.GetKey(RightCam);
-
-        if (cameraRot.eulerAngles.x < 89 || cameraRot.eulerAngles.x > 271)
+        if (LockOnTarget == null)
         {
-            up = Input.GetKey(UpCam);
-            down = Input.GetKey(DownCam);
-        }
-        else { 
-            if(cameraRot.eulerAngles.x > 180)
+            bool up = false;
+            bool down = false;
+            bool left = Input.GetKey(LeftCam);
+            bool right = Input.GetKey(RightCam);
+
+            if (cameraRot.eulerAngles.x < 89 || cameraRot.eulerAngles.x > 271)
             {
-                cameraRot = Quaternion.Euler(
-                    cameraRot.eulerAngles.x+1,
-                    cameraRot.eulerAngles.y,
-                    cameraRot.eulerAngles.z);
-            } else
-            {
-                cameraRot = Quaternion.Euler(
-                    cameraRot.eulerAngles.x-1,
-                    cameraRot.eulerAngles.y,
-                    cameraRot.eulerAngles.z);
+                up = Input.GetKey(UpCam);
+                down = Input.GetKey(DownCam);
             }
+            else
+            {
+                if (cameraRot.eulerAngles.x > 180)
+                {
+                    cameraRot = Quaternion.Euler(
+                        cameraRot.eulerAngles.x + 1,
+                        cameraRot.eulerAngles.y,
+                        cameraRot.eulerAngles.z);
+                }
+                else
+                {
+                    cameraRot = Quaternion.Euler(
+                        cameraRot.eulerAngles.x - 1,
+                        cameraRot.eulerAngles.y,
+                        cameraRot.eulerAngles.z);
+                }
+            }
+
+            Debug.Log(cameraRot.eulerAngles.x);
+
+            //move the camera in relation to 
+            cameraRot = Quaternion.Euler(
+                cameraRot.eulerAngles.x + (BoolToInt(down)) - (BoolToInt(up)),
+                cameraRot.eulerAngles.y + (BoolToInt(right)) - (BoolToInt(left)),
+                cameraRot.eulerAngles.z);
+
+            camPivot.position = PlayerModel.position;
+            camPivot.rotation = cameraRot;
+            if (Aiming)
+            {
+                cam.localPosition = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                cam.localPosition = new Vector3(0, 0, -10);
+            }
+            //this lags the fuck out of my computer. optimize or get rid of bloatware i guess
+        } else
+        {   //and from this day forth, HeroController was known as pythor the undebuggable.
+            camPivot.position = new Vector3((RB.transform.position.x + LockOnTarget.transform.position.x) / 2,
+                (RB.transform.position.y + LockOnTarget.transform.position.y) / 2,
+                (RB.transform.position.z + LockOnTarget.transform.position.z) / 2);
+            camPivot.rotation = Quaternion.Euler(30, RB.transform.rotation.eulerAngles.y + 90,0);
+            cam.localPosition = new Vector3(0, 0, Vector3.Distance(RB.transform.position, LockOnTarget.transform.position) * -0.5f - 4);
         }
-
-        Debug.Log(cameraRot.eulerAngles.x);
-
-        //move the camera in relation to 
-        cameraRot = Quaternion.Euler(
-            cameraRot.eulerAngles.x + (BoolToInt(down)) - (BoolToInt(up)), 
-            cameraRot.eulerAngles.y + (BoolToInt(right)) - (BoolToInt(left)), 
-            cameraRot.eulerAngles.z);
-
-        camPivot.position = PlayerModel.position;
-        camPivot.rotation = cameraRot;
-        if (Aiming)
-        {
-            cam.localPosition = new Vector3(0, 0, 0);
-        }
-        else
-        {
-            cam.localPosition = new Vector3(0, 0, -10);
-        }
-        //this lags the fuck out of my computer. optimize or get rid of bloatware i guess
-
     }
 
     //returns the rotation of the player movement.
@@ -179,11 +203,17 @@ public class HeroController : MonoBehaviour
         -1 / 1 = backwards
         -2 = nothing pressed
          */
-
         bool up = Input.GetKey(Forward);
         bool down = Input.GetKey(Backward);
         bool left = Input.GetKey(Left);
         bool right = Input.GetKey(Right);
+        if (LockOnTarget != null)
+        {
+            right = Input.GetKey(Forward);
+            left = Input.GetKey(Backward);
+            up = Input.GetKey(Left);
+            down = Input.GetKey(Right);
+        }
 
         if (up)
         {
@@ -288,6 +318,34 @@ public class HeroController : MonoBehaviour
         {
             if (inter.CanBePingedByPlayer) {
                 inter.pinged = true;
+            }
+        }
+    }
+
+    private void LockOntoEnemy()
+    {
+        if (Input.GetKeyDown(lockOn))
+        {
+            if (LockOnTarget == null)
+            {
+
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                float closestDist = 100000;
+
+                foreach (GameObject respawn in enemies)
+                {
+                    if (Vector3.Distance(respawn.transform.position, transform.position) < closestDist)
+                    {
+                        closestDist = Vector3.Distance(respawn.transform.position, transform.position);
+                        LockOnTarget = respawn;
+                    }
+                }
+
+
+                PlayerModel.rotation = RB.rotation;
+            } else
+            {
+                LockOnTarget = null;
             }
         }
     }

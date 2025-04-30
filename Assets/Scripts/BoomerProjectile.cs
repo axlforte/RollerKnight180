@@ -17,7 +17,19 @@ public class BoomerProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(new Vector3(0, 0, 0.5f));
+        if (rotateTowardsOwner)
+        {
+            transform.LookAt(owner.transform);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject == owner)
+        {
+
+        }
     }
 
     //istg i could just do this with a basic timer but NO we have to have a coroutine!
