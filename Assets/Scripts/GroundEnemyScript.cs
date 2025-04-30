@@ -30,4 +30,12 @@ public class GroundEnemyScript : Enemy
     {
         GameObject projectile = Instantiate(attackPrefab, transform.position, attackPrefab.transform.rotation);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 6)
+        {
+            health--;
+        }
+    }
 }

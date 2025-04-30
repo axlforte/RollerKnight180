@@ -432,6 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3706610534024767060}
   - component: {fileID: -305841135012178246}
+  - component: {fileID: -2002407009344082165}
   m_Layer: 0
   m_Name: TreeHarmer
   m_TagString: Untagged
@@ -476,7 +477,30 @@ MonoBehaviour:
   damage: 1
   timeBetweenAttacks: 3
   beginDelay: 1
-  attackPrefab: {fileID: 0}
+  attackPrefab: {fileID: 8133933510594341366, guid: 1baacedb7dbfacb4aa919e7ff84cc627, type: 3}
+--- !u!136 &-2002407009344082165
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979379181640435232}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8369480714249005491
 GameObject:
   m_ObjectHideFlags: 0
