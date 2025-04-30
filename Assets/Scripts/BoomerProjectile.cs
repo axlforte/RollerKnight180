@@ -17,7 +17,19 @@ public class BoomerProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(new Vector3(0, 0, 0.5f));
+        if (rotateTowardsOwner)
+        {
+            transform.LookAt(owner.transform);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject == owner)
+        {
+            Destroy(gameObject);
+        }
     }
 
     //istg i could just do this with a basic timer but NO we have to have a coroutine!
@@ -26,7 +38,7 @@ public class BoomerProjectile : MonoBehaviour
         rotateTowardsOwner = false;
         yield return new WaitForSeconds(1);
         rotateTowardsOwner = true;
-        owner = GameObject.Find("PlayerPosition");
+        owner = GameObject.Find("PlayerHandler");
     }
 
 }
