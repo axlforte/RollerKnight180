@@ -12,4 +12,5 @@ public class Interactible : MonoBehaviour
 {
     //this class does no processing. classes that inherit Interactible do have processing that use the bool pinged.
     public bool pinged;
+    public bool CanBePingedByPlayer;
 }

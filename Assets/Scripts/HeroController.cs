@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;//might not need this
 /*
  Davis Williams
 4/30/25
@@ -21,6 +22,7 @@ public class HeroController : MonoBehaviour
     public Interactible inter;
     public bool Aiming;
     public KeyCode Jumping, Item1, Item2, Interact, SwingSword;
+    public GameObject AimingReticle;
     [Header("Camera Data")]
 
     public float rotIntensity;
@@ -47,9 +49,6 @@ public class HeroController : MonoBehaviour
     public int arrows;
 
 
-    public Transform DebugCube;
-
-
     
 
     // Start is called before the first frame update
@@ -74,12 +73,14 @@ public class HeroController : MonoBehaviour
         Interaction();
         PositionCamera();
         swordSwing();
-        if (gotBow || 1 == 1)
+        if (gotBow)
         {
             Bow();
         }
-
-        DebugCube.rotation = cam.transform.rotation;
+        if(gotBoomer || 1 == 1)
+        {
+            Boomerang();
+        }
     }
 
     //gets if the player is currently colliding with the ground
@@ -97,8 +98,8 @@ public class HeroController : MonoBehaviour
 
             Debug.Log("hee hee");
         //the player will not move when aiming. locking on takes priority.
-        } else if (Aiming)
-        {
+        } else if (Aiming) {
+            RB.rotation = Quaternion.Euler(0, cam.rotation.eulerAngles.y, 0);
         //otherwise you are walking normally. rotate towards movement direction, not target.
         } else
         {
@@ -110,6 +111,7 @@ public class HeroController : MonoBehaviour
 
                 //why unity why
                 RB.rotation = Quaternion.Euler(0, ((rot * 180) + cameraRot.eulerAngles.y) / 2, 0);
+                //PlayerModel.rotation = Quaternion.Euler(0, ((rot * 180) + cameraRot.eulerAngles.y) / 2, 0);
             }
         }
         //Debug.Log(RB.transform.forward);
@@ -254,11 +256,13 @@ public class HeroController : MonoBehaviour
         if (Input.GetKeyDown(Item1))
         {
             Aiming = true;
+            AimingReticle.SetActive(true);
         }
         else if (Input.GetKeyUp(Item1))
         {
             Aiming = false;
-            Instantiate(arrowPrefab, transform.position + Vector3.up, Quaternion.Euler(cam.transform.rotation.eulerAngles.x / 2, cam.transform.rotation.eulerAngles.y / 2, cam.transform.rotation.eulerAngles.z));
+            AimingReticle.SetActive(false);
+            Instantiate(arrowPrefab, transform.position + Vector3.up, cam.transform.rotation);
         }
     }
 
@@ -282,8 +286,9 @@ public class HeroController : MonoBehaviour
     {
         if(inter != null && Input.GetKeyDown(Interact))
         {
-            //Debug.Log("Bing!");
-            inter.pinged = true;
+            if (inter.CanBePingedByPlayer) {
+                inter.pinged = true;
+            }
         }
     }
 
