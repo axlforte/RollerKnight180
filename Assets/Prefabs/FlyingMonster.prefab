@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 5299881692488565543}
   - component: {fileID: 4469657310142074517}
   - component: {fileID: 4661018276998056420}
-  - component: {fileID: -6324434293713318111}
+  - component: {fileID: -891517885716688876}
   m_Layer: 0
   m_Name: FlyingMonster
   m_TagString: Untagged
@@ -285,21 +285,29 @@ MonoBehaviour:
   invTime: 8
   damage: 1
   wherePlayerIsAt: {fileID: 4934521150277395900, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
---- !u!114 &-6324434293713318111
-MonoBehaviour:
+  agent: {fileID: 0}
+--- !u!195 &-891517885716688876
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5532192635079049337}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8568b24aaf10c45498029e0caec0a0e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1
-  invTime: 8
-  damage: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &5870410753989808337
 GameObject:
   m_ObjectHideFlags: 0

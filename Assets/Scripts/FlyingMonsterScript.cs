@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FlyingMonsterScript : Enemy
 {
 
     public GameObject wherePlayerIsAt;
+
+    public NavMeshAgent agent;
  
     // Start is called before the first frame update
     void Start()
@@ -39,5 +42,6 @@ public class FlyingMonsterScript : Enemy
     private void KeepLooking()
     {
         transform.LookAt(wherePlayerIsAt.transform);
+        agent.SetDestination(wherePlayerIsAt.transform.position);
     }
 }
