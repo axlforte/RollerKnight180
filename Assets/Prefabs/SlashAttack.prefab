@@ -101,7 +101,7 @@ MonoBehaviour:
   invTime: 8
   damage: 1
   dangerTime: 1
-  rotateSpeed: 5
+  rotateSpeed: 600
 --- !u!135 &8064216696181579444
 SphereCollider:
   m_ObjectHideFlags: 0
