@@ -37,5 +37,9 @@ public class GroundEnemyScript : Enemy
         {
             health--;
         }
+        else if (other.gameObject.layer == 7)
+        {
+            health--;
+        }
     }
 }
