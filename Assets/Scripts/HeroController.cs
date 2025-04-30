@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ Davis Williams
+4/30/25
+ makes the player perform all needed actions to complete a dungeon with a bow and boomerang. 
+ */
 
 public class HeroController : MonoBehaviour
 {
     //tooltips are cool. dassit
     [Header("Player Movement Data")]
+
     [Tooltip("The physics layers that the player can interact with")]
     public LayerMask LM;
     public KeyCode Forward, Backward, Left, Right;
@@ -16,6 +22,7 @@ public class HeroController : MonoBehaviour
     public bool Aiming;
     public KeyCode Jumping, Item1, Item2, Interact, SwingSword;
     [Header("Camera Data")]
+
     public float rotIntensity;
     public KeyCode UpCam, DownCam, LeftCam, RightCam;
     public Transform PlayerModel, cam, camPivot;
@@ -23,14 +30,19 @@ public class HeroController : MonoBehaviour
     [Header("Item Data")]
 
     public int swordPower;
-    public GameObject Sword;
+    public Transform Sword;
+    public Vector3 swingStart, swingEnd;//i only want the one swing, maybe a jump attack for lockon
+    [Tooltip("The amount of time the sword swings for, in physics frames (1/50th of a second)")]
+    public float swingMaxTime, swingSpeed;
+    float swingTime;
     public bool gotBoomer;
     public GameObject boomerangPrefab;
     public bool gotBow;
     public GameObject arrowPrefab;
     public int basicKeys;
-    public int rubies;
+    public int rubies;// legally distinct rupees
     public int health;// per quarter heart
+
 
     //only if we plan on making arrows limited but I personal dont think so
     //jeans: we should, if people dont like it just disable it lol
@@ -57,17 +69,20 @@ public class HeroController : MonoBehaviour
         Move();
         Interaction();
         PositionCamera();
-        if(gotBow || 1 == 1)
+        swordSwing();
+        if (gotBow || 1 == 1)
         {
             Bow();
         }
     }
 
+    //gets if the player is currently colliding with the ground
     private bool GetGrounded()
     {
         return Physics.Raycast(RB.transform.position + new Vector3(0,1,0), Vector3.down, 1.1f, LM);
     }
 
+    //moves the player in relation to their current rotation
     private void Move()
     {
         //the player strafes if they are locked on, and if they are aiming
@@ -196,10 +211,10 @@ public class HeroController : MonoBehaviour
     //if the player is grounded, jump
     private void Jump()
     {
-        Debug.Log("i can jump!");
+        //Debug.Log("i can jump!");
         if (Input.GetKeyDown(Jumping))
         {
-            Debug.Log("jumped!");
+           // Debug.Log("jumped!");
             RB.AddForce(Vector3.up * jumpForce);
         }
     }
@@ -207,7 +222,24 @@ public class HeroController : MonoBehaviour
     //activates the sword hitbox, moves it in a horiz swipe, then disables the hitbox
     private void swordSwing()
     {
-        //hehe timer?
+
+        if (swingTime >= 0.5f)
+        {
+            swingTime = swingTime / swingSpeed;
+            Sword.localRotation = Quaternion.Slerp(Quaternion.Euler(swingStart.x, swingStart.y, swingStart.z), Quaternion.Euler(swingEnd.x, swingEnd.y, swingEnd.z), 1 - (swingTime / swingMaxTime));
+        }
+        else if (swingTime >= 0)
+        {
+            Sword.gameObject.SetActive(false);
+            swingTime--;
+        }
+        else if (Input.GetKey(SwingSword))//istg i tried to make these readable
+        {
+            //Debug.Log("swing!");
+            swingTime = swingMaxTime;
+            Sword.gameObject.SetActive(true);
+            Sword.localRotation = Quaternion.Slerp(Quaternion.Euler(swingStart.x, swingStart.y, swingStart.z), Quaternion.Euler(swingEnd.x, swingEnd.y, swingEnd.z), 1 - (swingTime / swingMaxTime));
+        }
     }
 
     //item1 is bow
@@ -244,7 +276,7 @@ public class HeroController : MonoBehaviour
     {
         if(inter != null && Input.GetKeyDown(Interact))
         {
-            Debug.Log("Bing!");
+            //Debug.Log("Bing!");
             inter.pinged = true;
         }
     }
