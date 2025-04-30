@@ -9,7 +9,9 @@ public class FlyingMonsterScript : Enemy
     public GameObject wherePlayerIsAt;
 
     public NavMeshAgent agent;
- 
+
+    public float detectionRange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class FlyingMonsterScript : Enemy
     void Update()
     {
         KeepLooking();
+        Detect();
 
         if (health <= 0)
         {
@@ -39,9 +42,9 @@ public class FlyingMonsterScript : Enemy
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Detect()
     {
-        if (other.GetComponent<HeroController>())
+        if (Vector3.Distance(wherePlayerIsAt.transform.position, transform.position) <= detectionRange)
         {
             agent.SetDestination(wherePlayerIsAt.transform.position);
         }
@@ -49,6 +52,5 @@ public class FlyingMonsterScript : Enemy
     private void KeepLooking()
     {
         transform.LookAt(wherePlayerIsAt.transform);
- 
     }
 }
