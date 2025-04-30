@@ -1,0 +1,10 @@
+Gale Boomerang extracted from Twilight Princess.
+
+Tools:
+Dolphin to extract the .arc files
+yaz0dec.exe and/or rarcdump.exe
+BmdView2 for 3ds and textures
+Blender 2.78
+
+AJD-262
+March 17 2021
