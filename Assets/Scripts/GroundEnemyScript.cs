@@ -6,7 +6,6 @@ using UnityEngine;
 public class GroundEnemyScript : Enemy
 {
 
-    public int health;
     public float timeBetweenAttacks;
     public float beginDelay;
 

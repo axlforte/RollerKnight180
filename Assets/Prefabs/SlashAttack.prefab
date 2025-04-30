@@ -97,7 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9ca9ead714fff4cbe4e5eedaea27a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dangerTime: 0
+  health: 1
+  invTime: 8
+  damage: 1
+  dangerTime: 1
+  rotateSpeed: 5
 --- !u!135 &8064216696181579444
 SphereCollider:
   m_ObjectHideFlags: 0

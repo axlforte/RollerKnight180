@@ -471,6 +471,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7f253538802ef4e88a59398cdbe798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 1
+  invTime: 8
+  damage: 1
+  timeBetweenAttacks: 3
+  beginDelay: 1
+  attackPrefab: {fileID: 0}
 --- !u!1 &8369480714249005491
 GameObject:
   m_ObjectHideFlags: 0
