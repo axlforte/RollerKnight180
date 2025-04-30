@@ -40,6 +40,11 @@ public class FlyingMonsterScript : Enemy
         {
             health--;
         }
+
+        if (other.GetComponent<HeroController>())
+        {
+            other.GetComponent<HeroController>().health = other.GetComponent<HeroController>().health - damage;
+        }
     }
 
     private void Detect()
