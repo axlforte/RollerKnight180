@@ -38,10 +38,17 @@ public class FlyingMonsterScript : Enemy
             health--;
         }
     }
-    
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<HeroController>())
+        {
+            agent.SetDestination(wherePlayerIsAt.transform.position);
+        }
+    }
     private void KeepLooking()
     {
         transform.LookAt(wherePlayerIsAt.transform);
-        agent.SetDestination(wherePlayerIsAt.transform.position);
+ 
     }
 }
