@@ -28,7 +28,7 @@ public class BoomerProjectile : MonoBehaviour
     {
         if(other.gameObject == owner)
         {
-
+            Destroy(gameObject);
         }
     }
 
@@ -38,7 +38,7 @@ public class BoomerProjectile : MonoBehaviour
         rotateTowardsOwner = false;
         yield return new WaitForSeconds(1);
         rotateTowardsOwner = true;
-        owner = GameObject.Find("PlayerPosition");
+        owner = GameObject.Find("PlayerHandler");
     }
 
 }

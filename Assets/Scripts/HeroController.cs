@@ -302,11 +302,13 @@ public class HeroController : MonoBehaviour
         if (Input.GetKeyDown(Item2))
         {
             Aiming = true;
+            AimingReticle.SetActive(true);
         }
         else if (Input.GetKeyUp(Item2))
         {
             Aiming = false;
-            Instantiate(boomerangPrefab, transform.position + Vector3.up, Quaternion.Euler(cam.transform.rotation.eulerAngles.x / 2, cam.transform.rotation.eulerAngles.y / 2, cam.transform.rotation.eulerAngles.z));
+            AimingReticle.SetActive(false);
+            Instantiate(boomerangPrefab, transform.position + Vector3.up, cam.transform.rotation);
         }
     }
 
@@ -317,7 +319,17 @@ public class HeroController : MonoBehaviour
         if(inter != null && Input.GetKeyDown(Interact))
         {
             if (inter.CanBePingedByPlayer) {
-                inter.pinged = true;
+                //door specific code, namely keys
+                if (inter.GetComponent<DoorScript>())
+                {
+                    if (inter.GetComponent<DoorScript>().KeysNeeded >= basicKeys) {
+                        inter.pinged = true;
+                        basicKeys -= inter.GetComponent<DoorScript>().KeysNeeded;
+                    }
+                } else
+                {
+                    inter.pinged = true;
+                }
             }
         }
     }

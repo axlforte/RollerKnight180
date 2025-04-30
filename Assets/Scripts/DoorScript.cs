@@ -14,6 +14,7 @@ public class DoorScript : Interactible
     public Vector3 origin;
     public GameObject DoorCollision;
     public float raiseTime;
+    public int KeysNeeded = 0;
 
     // Start is called before the first frame update
     void Start()
