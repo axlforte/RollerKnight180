@@ -17,8 +17,7 @@ public class EnemyAttackScript : Enemy
     // Update is called once per frame
     void Update()
     {
-
- 
+        transform.Rotate(0, rotateSpeed * Time.deltaTime,0);
     }
 
     private IEnumerator AttackTimer()
