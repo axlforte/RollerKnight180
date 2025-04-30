@@ -18,4 +18,12 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 6)
+        {
+            health--;
+        }
+    }
 }
