@@ -42,11 +42,15 @@ public class HeroController : MonoBehaviour
     public int basicKeys;
     public int rubies;// legally distinct rupees
     public int health;// per quarter heart
-
-
     //only if we plan on making arrows limited but I personal dont think so
     //jeans: we should, if people dont like it just disable it lol
     public int arrows;
+
+
+    public Transform DebugCube;
+
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +78,8 @@ public class HeroController : MonoBehaviour
         {
             Bow();
         }
+
+        DebugCube.rotation = cam.transform.rotation;
     }
 
     //gets if the player is currently colliding with the ground
