@@ -13,13 +13,7 @@ public class Enemy : MonoBehaviour
     {
         if(other.gameObject.layer == 6)
         {
-            health--;//does not consider anything in relation to sword level. will add this in class.
-        } else
-        {
-            if (other.GetComponent<HeroController>())
-            {
-                other.GetComponent<HeroController>().health -= damage;
-            }
+            health--;
         }
     }
 }

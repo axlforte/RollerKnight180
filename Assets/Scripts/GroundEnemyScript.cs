@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GroundEnemyScript : MonoBehaviour
+public class GroundEnemyScript : Enemy
 {
 
-    public int health;
     public float timeBetweenAttacks;
     public float beginDelay;
 
