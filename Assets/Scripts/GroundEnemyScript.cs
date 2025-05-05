@@ -8,6 +8,7 @@ public class GroundEnemyScript : Enemy
 
     public float timeBetweenAttacks;
     public float beginDelay;
+    public bool iAmInvincible;
 
     public GameObject attackPrefab;
 
@@ -33,13 +34,22 @@ public class GroundEnemyScript : Enemy
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6)
+        if (other.gameObject.layer == 6 && iAmInvincible == false && other.GetComponent<HeroController>())
+        {
+            health = health - other.GetComponent<HeroController>().swordPower;
+            StartCoroutine(BasicHit());
+        }
+        else if (other.gameObject.layer == 7 && iAmInvincible == false)
         {
             health--;
+            StartCoroutine(BasicHit());
         }
-        else if (other.gameObject.layer == 7)
-        {
-            health--;
-        }
+    }
+
+    IEnumerator BasicHit()
+    {
+        iAmInvincible = true;
+        yield return new WaitForSeconds(invTime);
+        iAmInvincible = false;
     }
 }

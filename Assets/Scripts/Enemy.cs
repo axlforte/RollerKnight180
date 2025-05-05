@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health = 1;
-    public float invTime = 8;// the invuln needs to be just long enough to not get double hit by a sword swing
+    public float invTime = 1;// the invuln needs to be just long enough to not get double hit by a sword swing
     public int damage = 1;//how many quarters of a heart the enemy removes with contact
     
 

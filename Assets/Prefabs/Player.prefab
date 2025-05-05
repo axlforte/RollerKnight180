@@ -444,6 +444,7 @@ MonoBehaviour:
   Item2: 102
   Interact: 113
   SwingSword: 32
+  lockOn: 0
   AimingReticle: {fileID: 6465205113187311337}
   rotIntensity: 0
   UpCam: 273
@@ -454,7 +455,7 @@ MonoBehaviour:
   cam: {fileID: 1905971291460697873}
   camPivot: {fileID: 4993973745111528406}
   cameraRot: {x: 0, y: 0, z: 0, w: 0}
-  swordPower: 0
+  swordPower: 1
   Sword: {fileID: 103529683718839719}
   swingStart: {x: 0, y: 180, z: 0}
   swingEnd: {x: 0, y: 360, z: 0}
