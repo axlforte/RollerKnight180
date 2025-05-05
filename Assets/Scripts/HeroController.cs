@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;//might not need this
+using UnityEngine.UI;
 /*
  Davis Williams
 4/30/25
@@ -44,13 +44,17 @@ public class HeroController : MonoBehaviour
     public int basicKeys;
     public int rubies;// legally distinct rupees
     public int health;// per quarter heart
-    //only if we plan on making arrows limited but I personal dont think so
-    //jeans: we should, if people dont like it just disable it lol
-    public int arrows;
+    public int maxHealth;
 
-    // Start is called before the first frame update
+    [Header("UI Data")]
+    public Sprite[] hearts;//the levels of health, from full heart to none;
+    public Image[] UIHearts;//the images on the HUD
+
     void Start()
     {
+        AimingReticle.SetActive(false);
+        UIHearts[3].gameObject.SetActive(false);
+        UIHearts[4].gameObject.SetActive(false);
     }
 
     /* too lazy to do time.deltatime
@@ -70,6 +74,7 @@ public class HeroController : MonoBehaviour
         Interaction();
         PositionCamera();
         swordSwing();
+        UpdateHearts();
         if (gotBow)
         {
             Bow();
@@ -163,11 +168,11 @@ public class HeroController : MonoBehaviour
 
             //move the camera in relation to 
             cameraRot = Quaternion.Euler(
-                cameraRot.eulerAngles.x + (BoolToInt(down)) - (BoolToInt(up)),
-                cameraRot.eulerAngles.y + (BoolToInt(right)) - (BoolToInt(left)),
+                cameraRot.eulerAngles.x + ((BoolToInt(down)) - (BoolToInt(up))) * rotIntensity,
+                cameraRot.eulerAngles.y + ((BoolToInt(right)) - (BoolToInt(left))) * rotIntensity,
                 cameraRot.eulerAngles.z);
 
-            camPivot.position = PlayerModel.position;
+            camPivot.position = PlayerModel.position + Vector3.up * 0.5f;
             camPivot.rotation = cameraRot;
             if (Aiming)
             {
@@ -175,8 +180,14 @@ public class HeroController : MonoBehaviour
             }
             else
             {
-                cam.localPosition = new Vector3(0, 0, -10);
+                //get the distance the camera can comfortably move without being in a wall, then remove 0.1
+                RaycastHit hit;
+                if (Physics.Raycast(camPivot.position, camPivot.forward * -1, out hit, 10f))
+                    cam.localPosition = new Vector3(0, 0, (hit.distance - 0.1f) * -1);
+                else 
+                    cam.localPosition = new Vector3(0, 0, -10);
             }
+
             //this lags the fuck out of my computer. optimize or get rid of bloatware i guess
         } else
         {   //and from this day forth, HeroController was known as pythor the undebuggable.
@@ -360,6 +371,37 @@ public class HeroController : MonoBehaviour
             } else
             {
                 LockOnTarget = null;
+            }
+        }
+    }
+
+    private void UpdateHearts()
+    {
+        for (int e = 0; e < maxHealth / 4; e++)
+        {
+            if (health - e * 4 > 0)
+            {
+                UIHearts[e].sprite = hearts[1];
+            }
+            else if (health - e * 4 > 1)
+            {
+                UIHearts[e].sprite = hearts[2];
+            }
+            else if (health - e * 4 > 2)
+            {
+                UIHearts[e].sprite = hearts[3];
+            }
+            else if (health - e * 4 > 3)
+            {
+                UIHearts[e].sprite = hearts[4];
+            }
+            else if (health - e * 4 > 4)
+            {
+                UIHearts[e].sprite = hearts[5];
+            }
+            else
+            {
+                UIHearts[e].sprite = hearts[0];
             }
         }
     }
