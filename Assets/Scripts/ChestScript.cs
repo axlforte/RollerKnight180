@@ -21,10 +21,10 @@ public class ChestScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<HeroController>())
+        if(other.GetComponent<HeroController>() && itemInChest != null)
         {
             GameObject projectile = Instantiate(itemInChest, transform.position + new Vector3(0,1,0), itemInChest.transform.rotation);
-            
+            itemInChest = null;
         }
     }
 }

@@ -28,7 +28,7 @@ public class EnemyAttackScript : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<HeroController>())
+        if (other.GetComponent<HeroController>() && other.GetComponent<HeroController>().iAmInvincible == false)
         {
             other.GetComponent<HeroController>().health = other.GetComponent<HeroController>().health - damage;
         }

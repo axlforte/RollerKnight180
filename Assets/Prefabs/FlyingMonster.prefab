@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5775804091532545744}
   - component: {fileID: 2164554898529998589}
   - component: {fileID: 5892476551939174866}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 5505406858503058586}
   - component: {fileID: 879221470591046954}
   - component: {fileID: 2051793741494742712}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,9 +222,9 @@ GameObject:
   - component: {fileID: 4469657310142074517}
   - component: {fileID: 4661018276998056420}
   - component: {fileID: -891517885716688876}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FlyingMonster
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,9 +284,11 @@ MonoBehaviour:
   health: 1
   invTime: 8
   damage: 1
+  interactible: {fileID: 0}
   wherePlayerIsAt: {fileID: 0}
   agent: {fileID: -891517885716688876}
   detectionRange: 9
+  iAmInvincible: 0
 --- !u!195 &-891517885716688876
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -321,7 +323,7 @@ GameObject:
   - component: {fileID: 6607128775866456994}
   - component: {fileID: 6883127447453409686}
   - component: {fileID: 2572750530421400614}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +428,7 @@ GameObject:
   - component: {fileID: 4691342763375032384}
   - component: {fileID: 528786784105535541}
   - component: {fileID: 6520956215480366935}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
