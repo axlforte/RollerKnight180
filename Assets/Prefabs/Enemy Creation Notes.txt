@@ -1,0 +1,4 @@
+enemies need the enemy tag and the ignoreraycast layer to work properly
+
+the tag is for the lock on system, this lets the player check every enemy for lock on purposes
+the ignore raycast layer is because a raycast is made to check if the player can actually see the enemy. if they cant, then the enemy is ignored.

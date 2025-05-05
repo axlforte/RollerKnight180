@@ -6,7 +6,7 @@ public class BoomerProjectile : MonoBehaviour
 {
     public float waitTime;
     public bool rotateTowardsOwner = false;
-    public GameObject owner = null;
+    public GameObject owner = null, grabbedObject = null;
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +22,27 @@ public class BoomerProjectile : MonoBehaviour
         {
             transform.LookAt(owner.transform);
         }
+        if (grabbedObject != null)
+        {
+            grabbedObject.transform.position = transform.position;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == owner)
+        if (other.gameObject == owner)
         {
             Destroy(gameObject);
+        } else if (grabbedObject == null)
+        {
+            if (other.GetComponent<KeyScript>())
+            {
+                grabbedObject = other.gameObject;
+            }
+            else if (other.GetComponent<RubieScript>())
+            {
+                grabbedObject = other.gameObject;
+            }
         }
     }
 
