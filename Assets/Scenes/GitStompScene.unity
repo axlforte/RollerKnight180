@@ -79392,7 +79392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8444211686812085252, guid: 0edde3aca183dae4898a3848cd4fa4a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.35
+      value: -8.29
       objectReference: {fileID: 0}
     - target: {fileID: 8444211686812085252, guid: 0edde3aca183dae4898a3848cd4fa4a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -79658,6 +79658,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b216b8e3fb624144bf52ea93f8f9b56, type: 3}
+--- !u!1001 &8489667646667160213
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818550530832229659, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6469963568804846914, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
+      propertyPath: m_Name
+      value: MaxHealthPickUp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4831a19a3eb14745964b34a54fdf0cc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -79677,3 +79734,4 @@ SceneRoots:
   - {fileID: 571897904}
   - {fileID: 7947873365578523749}
   - {fileID: 501173034786227980}
+  - {fileID: 8489667646667160213}
