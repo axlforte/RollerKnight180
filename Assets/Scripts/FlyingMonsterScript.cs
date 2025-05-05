@@ -12,10 +12,14 @@ public class FlyingMonsterScript : Enemy
 
     public float detectionRange;
 
+    public bool iAmInvincible;
+
+    private HeroController playerReference;
+
     // Start is called before the first frame update
     void Start()
     {
- 
+        playerReference = GameObject.FindObjectOfType<HeroController>();
     }
 
     // Update is called once per frame
@@ -32,16 +36,17 @@ public class FlyingMonsterScript : Enemy
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6)
+        if (other.gameObject.layer == 6 )
         {
-            health--;
+            health = health - playerReference.swordPower;
+            StartCoroutine(BasicHit());
         }
         else if (other.gameObject.layer == 7)
         {
             health--;
         }
 
-        if (other.GetComponent<HeroController>())
+        if (other.GetComponent<HeroController>() && other.GetComponent<HeroController>().iAmInvincible == false)
         {
             other.GetComponent<HeroController>().health = other.GetComponent<HeroController>().health - damage;
         }
@@ -57,5 +62,12 @@ public class FlyingMonsterScript : Enemy
     private void KeepLooking()
     {
         transform.LookAt(wherePlayerIsAt.transform);
+    }
+
+    IEnumerator BasicHit()
+    {
+        iAmInvincible = true;
+        yield return new WaitForSeconds(invTime);
+        iAmInvincible = false;
     }
 }

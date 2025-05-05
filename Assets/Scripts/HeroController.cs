@@ -44,9 +44,12 @@ public class HeroController : MonoBehaviour
     public int basicKeys;
     public int rubies;// legally distinct rupees
     public int health;// per quarter heart
+    public int maxHealth = 12;
     //only if we plan on making arrows limited but I personal dont think so
     //jeans: we should, if people dont like it just disable it lol
     public int arrows;
+
+    public bool iAmInvincible;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +77,7 @@ public class HeroController : MonoBehaviour
         {
             Bow();
         }
-        if(gotBoomer || 1 == 1)
+        if(gotBoomer)
         {
             Boomerang();
         }
@@ -382,6 +385,17 @@ public class HeroController : MonoBehaviour
         {
             inter = other.gameObject.GetComponent<Interactible>();
         }
+
+        if (other.GetComponent<EnemyAttackScript>() || other.GetComponent<EnemyAttackScript>())
+        {
+            StartCoroutine(BasicHit());
+        }
+
+        if (other.GetComponent<HealthPickUp>())
+        {
+            health = Mathf.Clamp(health + other.GetComponent<HealthPickUp>().healthGiven, 0, maxHealth);
+            Destroy(other.gameObject);
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -390,5 +404,13 @@ public class HeroController : MonoBehaviour
         {
             inter = null;
         }
+    }
+
+
+    IEnumerator BasicHit()
+    {
+        iAmInvincible = true;
+        yield return new WaitForSeconds(3);
+        iAmInvincible = false;
     }
 }

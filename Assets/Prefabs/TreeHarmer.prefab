@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5500388696425337626}
   - component: {fileID: 2627046774156450845}
   - component: {fileID: 3687953925378601650}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 6285350216878573565}
   - component: {fileID: 5845243463877605365}
   - component: {fileID: 414793797421325480}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 1640027547489599371}
   - component: {fileID: 1612679169777386855}
   - component: {fileID: 1865055629377053222}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 6524087484763238055}
   - component: {fileID: 8858516154129139825}
   - component: {fileID: 8094184844579610048}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,9 +433,9 @@ GameObject:
   - component: {fileID: 3706610534024767060}
   - component: {fileID: -305841135012178246}
   - component: {fileID: -2002407009344082165}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TreeHarmer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -475,6 +475,7 @@ MonoBehaviour:
   health: 1
   invTime: 1
   damage: 1
+  interactible: {fileID: 0}
   timeBetweenAttacks: 3
   beginDelay: 1
   iAmInvincible: 0
@@ -514,7 +515,7 @@ GameObject:
   - component: {fileID: 971349163337325063}
   - component: {fileID: 9206210128957648054}
   - component: {fileID: 3087239410303466653}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
