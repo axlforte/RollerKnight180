@@ -48,13 +48,9 @@ public class HeroController : MonoBehaviour
     //jeans: we should, if people dont like it just disable it lol
     public int arrows;
 
-
-    
-
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     /* too lazy to do time.deltatime
@@ -292,7 +288,10 @@ public class HeroController : MonoBehaviour
         {
             Aiming = false;
             AimingReticle.SetActive(false);
-            Instantiate(arrowPrefab, transform.position + Vector3.up, cam.transform.rotation);
+            if (LockOnTarget != null)
+                Instantiate(arrowPrefab, transform.position + Vector3.up, PlayerModel.transform.rotation);
+            else
+                Instantiate(arrowPrefab, transform.position + Vector3.up, cam.transform.rotation);
         }
     }
 
@@ -308,7 +307,10 @@ public class HeroController : MonoBehaviour
         {
             Aiming = false;
             AimingReticle.SetActive(false);
-            Instantiate(boomerangPrefab, transform.position + Vector3.up, cam.transform.rotation);
+            if (LockOnTarget != null)
+                Instantiate(boomerangPrefab, transform.position + Vector3.up * 2, PlayerModel.transform.rotation);
+            else
+                Instantiate(boomerangPrefab, transform.position + Vector3.up * 2, cam.transform.rotation);
         }
     }
 
@@ -346,7 +348,7 @@ public class HeroController : MonoBehaviour
 
                 foreach (GameObject respawn in enemies)
                 {
-                    if (Vector3.Distance(respawn.transform.position, transform.position) < closestDist)
+                    if (Vector3.Distance(respawn.transform.position, transform.position) < closestDist && !Physics.Linecast(PlayerModel.transform.position, respawn.transform.position, LM))
                     {
                         closestDist = Vector3.Distance(respawn.transform.position, transform.position);
                         LockOnTarget = respawn;
