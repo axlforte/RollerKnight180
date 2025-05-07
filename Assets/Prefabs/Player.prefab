@@ -737,7 +737,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 7957925978494710651, guid: e50c33576e81d124ea720bc72c135cca, type: 3}
   basicKeys: 0
   rubies: 0
-  health: 6
+  health: 12
   maxHealth: 12
   healthGText: {fileID: 80977603421652228}
   iAmInvincible: 0
