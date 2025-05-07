@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 /*
  Davis Williams
 4/30/25
@@ -26,6 +27,7 @@ public class HeroController : MonoBehaviour
     [Header("Camera Data")]
 
     public float rotIntensity;
+    public float camDist;
     public KeyCode UpCam, DownCam, LeftCam, RightCam;
     public Transform PlayerModel, cam, camPivot;
     public Quaternion cameraRot;
@@ -47,8 +49,9 @@ public class HeroController : MonoBehaviour
     public int maxHealth;
 
     [Header("UI Data")]
-    public Sprite[] hearts;//the levels of health, from full heart to none;
-    public Image[] UIHearts;//the images on the HUD
+    //public Sprite[] hearts;//the levels of health, from full heart to none;
+   // public Image[] UIHearts;//the images on the HUD
+    public TMP_Text healthGText;
 
     public bool iAmInvincible;
 
@@ -56,8 +59,8 @@ public class HeroController : MonoBehaviour
     void Start()
     {
         AimingReticle.SetActive(false);
-        UIHearts[3].gameObject.SetActive(false);
-        UIHearts[4].gameObject.SetActive(false);
+        //UIHearts[3].gameObject.SetActive(false);
+       // UIHearts[4].gameObject.SetActive(false);
     }
 
     /* too lazy to do time.deltatime
@@ -167,7 +170,7 @@ public class HeroController : MonoBehaviour
                 }
             }
 
-            Debug.Log(cameraRot.eulerAngles.x);
+           // Debug.Log(cameraRot.eulerAngles.x);
 
             //move the camera in relation to 
             cameraRot = Quaternion.Euler(
@@ -185,10 +188,10 @@ public class HeroController : MonoBehaviour
             {
                 //get the distance the camera can comfortably move without being in a wall, then remove 0.1
                 RaycastHit hit;
-                if (Physics.Raycast(camPivot.position, camPivot.forward * -1, out hit, 10f))
+                if (Physics.Raycast(camPivot.position, camPivot.forward * -1, out hit, camDist))
                     cam.localPosition = new Vector3(0, 0, (hit.distance - 0.1f) * -1);
                 else 
-                    cam.localPosition = new Vector3(0, 0, -10);
+                    cam.localPosition = new Vector3(0, 0, -camDist);
             }
 
             //this lags the fuck out of my computer. optimize or get rid of bloatware i guess
@@ -380,33 +383,7 @@ public class HeroController : MonoBehaviour
 
     private void UpdateHearts()
     {
-        for (int e = 0; e < maxHealth / 4; e++)
-        {
-            if (health - e * 4 > 0)
-            {
-                UIHearts[e].sprite = hearts[1];
-            }
-            else if (health - e * 4 > 1)
-            {
-                UIHearts[e].sprite = hearts[2];
-            }
-            else if (health - e * 4 > 2)
-            {
-                UIHearts[e].sprite = hearts[3];
-            }
-            else if (health - e * 4 > 3)
-            {
-                UIHearts[e].sprite = hearts[4];
-            }
-            else if (health - e * 4 > 4)
-            {
-                UIHearts[e].sprite = hearts[5];
-            }
-            else
-            {
-                UIHearts[e].sprite = hearts[0];
-            }
-        }
+        healthGText.text = health + "";
     }
 
     //A helper function that converts booleans to integers. I dont know if casting works and i am too lazy to check
