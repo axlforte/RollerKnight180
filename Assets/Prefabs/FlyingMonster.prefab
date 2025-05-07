@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 4469657310142074517}
   - component: {fileID: 4661018276998056420}
   - component: {fileID: -891517885716688876}
-  - component: {fileID: -3979321377851661983}
+  - component: {fileID: 2560902566035845656}
   m_Layer: 2
   m_Name: FlyingMonster
   m_TagString: Enemy
@@ -286,6 +286,7 @@ MonoBehaviour:
   invTime: 8
   damage: 1
   interactible: {fileID: 0}
+  frozen: 0
   wherePlayerIsAt: {fileID: 0}
   agent: {fileID: -891517885716688876}
   detectionRange: 9
@@ -312,7 +313,7 @@ NavMeshAgent:
   m_BaseOffset: 1.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &-3979321377851661983
+--- !u!54 &2560902566035845656
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

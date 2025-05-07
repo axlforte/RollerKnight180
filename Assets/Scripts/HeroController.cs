@@ -405,8 +405,6 @@ public class HeroController : MonoBehaviour
             inter = other.gameObject.GetComponent<Interactible>();
         }
 
-
-
         if (other.GetComponent<HealthPickUp>())
         {
             health = Mathf.Clamp(health + other.GetComponent<HealthPickUp>().healthGiven, 0, maxHealth);
@@ -416,6 +414,7 @@ public class HeroController : MonoBehaviour
         if (other.GetComponent<MaxHealthPickUp>())
         {
             maxHealth = maxHealth + other.GetComponent<MaxHealthPickUp>().maxHealthGiven;
+            health = maxHealth;
             Destroy(other.gameObject);
         }
 

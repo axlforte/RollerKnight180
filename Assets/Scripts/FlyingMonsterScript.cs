@@ -40,16 +40,16 @@ public class FlyingMonsterScript : Enemy
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6)
+        if (other.gameObject.layer == 6) //sword layer
         {
             health = health - playerReference.swordPower;
             StartCoroutine(BasicHit());
         }
-        else if (other.gameObject.layer == 7)
+        else if (other.gameObject.layer == 7) //arrow layer
         {
             health--;
         }
-        else if (other.gameObject.layer == 8)
+        else if (other.gameObject.layer == 8) // boomerang layer
         {
             StartCoroutine(Stunned());
         }

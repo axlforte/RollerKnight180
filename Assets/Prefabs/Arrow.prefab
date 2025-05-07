@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6080330989869718749}
   - component: {fileID: 4131893770383538603}
   - component: {fileID: 5188736613240158364}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4958268469465080093}
   - component: {fileID: 2469380860144761735}
   - component: {fileID: 2780258177036685138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3958438275338839167}
   - component: {fileID: 3866849041725590149}
   - component: {fileID: 227523657183120841}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 3767080895710302092}
   - component: {fileID: 2835271718615080499}
   - component: {fileID: 2587960250216986300}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 7508969350578717352}
   - component: {fileID: 1981064120589392057}
   - component: {fileID: 1209945206918809970}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 7563694359561980299}
   - component: {fileID: 5622950000442921971}
   - component: {fileID: 257570456463674911}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,8 @@ GameObject:
   - component: {fileID: 2140088279208267092}
   - component: {fileID: 8608080421887433914}
   - component: {fileID: 9048725839587821935}
-  m_Layer: 0
+  - component: {fileID: 1487603945088990552}
+  m_Layer: 7
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,5 +569,32 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.2, z: 1}
+  m_Size: {x: 0.55, y: 0.53, z: 1.3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1487603945088990552
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957925978494710651}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
