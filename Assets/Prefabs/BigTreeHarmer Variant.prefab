@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2438284155037879405, guid: 479386de0b80ae54ba25d33005f2e728, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 2627046774156450845, guid: 479386de0b80ae54ba25d33005f2e728, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -109,6 +113,7 @@ MonoBehaviour:
   health: 4
   invTime: 1
   damage: 2
+  interactible: {fileID: 0}
   timeBetweenAttacks: 3
   beginDelay: 1
   iAmInvincible: 0
