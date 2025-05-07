@@ -6,13 +6,21 @@ public class BoomerProjectile : MonoBehaviour
 {
     public float waitTime;
     public bool rotateTowardsOwner = false;
-    public GameObject owner = null, grabbedObject = null;
+    public GameObject owner = null, grabbedObject = null, RotTowardsTarget;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(rotate());
+        StartCoroutine(rotate()); 
+        StartCoroutine(die());
     }
+
+    IEnumerator die()
+    {
+        yield return new WaitForSeconds(15);
+        Destroy(gameObject);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -20,12 +28,21 @@ public class BoomerProjectile : MonoBehaviour
         transform.Translate(new Vector3(0, 0, 0.5f));
         if (rotateTowardsOwner)
         {
-            transform.LookAt(owner.transform);
+            RotTowardsTarget.transform.LookAt(owner.transform);
+            RotateSlightlyTowardsTarget();
         }
         if (grabbedObject != null)
         {
             grabbedObject.transform.position = transform.position;
         }
+    }
+
+    void RotateSlightlyTowardsTarget()
+    {
+        Vector3 Slerp = Vector3.Lerp(transform.rotation.eulerAngles, RotTowardsTarget.transform.rotation.eulerAngles, 0.25f);
+        Slerp = new Vector3(Slerp.x, Slerp.y, Slerp.z);
+
+        transform.rotation = Quaternion.Euler(Slerp);
     }
 
     void OnTriggerEnter(Collider other)
