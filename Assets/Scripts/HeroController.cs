@@ -405,10 +405,7 @@ public class HeroController : MonoBehaviour
             inter = other.gameObject.GetComponent<Interactible>();
         }
 
-        if (other.GetComponent<EnemyAttackScript>() || other.GetComponent<EnemyAttackScript>())
-        {
-            StartCoroutine(BasicHit());
-        }
+
 
         if (other.GetComponent<HealthPickUp>())
         {
@@ -420,6 +417,18 @@ public class HeroController : MonoBehaviour
         {
             maxHealth = maxHealth + other.GetComponent<MaxHealthPickUp>().maxHealthGiven;
             Destroy(other.gameObject);
+        }
+
+        if(other.GetComponent<EnemyAttackScript>() && iAmInvincible == false)
+        {
+            health = health - other.GetComponent<EnemyAttackScript>().damage;
+            StartCoroutine(BasicHit());
+        }
+
+        if (other.GetComponent<FlyingMonsterScript>() && iAmInvincible == false)
+        {
+            health = health - other.GetComponent<FlyingMonsterScript>().damage;
+            StartCoroutine(BasicHit());
         }
     }
 

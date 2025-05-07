@@ -54,10 +54,6 @@ public class FlyingMonsterScript : Enemy
             StartCoroutine(Stunned());
         }
 
-        if (other.GetComponent<HeroController>() && other.GetComponent<HeroController>().iAmInvincible == false)
-        {
-            other.GetComponent<HeroController>().health = other.GetComponent<HeroController>().health - damage;
-        }
     }
 
     private void Detect()
