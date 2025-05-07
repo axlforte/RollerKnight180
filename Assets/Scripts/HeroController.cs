@@ -341,7 +341,7 @@ public class HeroController : MonoBehaviour
                 //door specific code, namely keys
                 if (inter.GetComponent<DoorScript>())
                 {
-                    if (inter.GetComponent<DoorScript>().KeysNeeded >= basicKeys) {
+                    if (inter.GetComponent<DoorScript>().KeysNeeded <= basicKeys) {
                         inter.pinged = true;
                         basicKeys -= inter.GetComponent<DoorScript>().KeysNeeded;
                     }
