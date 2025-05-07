@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -1577151628359901533}
   - component: {fileID: 1071284892976718321}
   - component: {fileID: -1637718200768693216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bproj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6211559306844698895}
   - component: {fileID: 7924468751269456990}
   - component: {fileID: 3513299080699203184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 2803870791432833002}
   - component: {fileID: 5051516871534827652}
   - component: {fileID: 5544416452452235968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

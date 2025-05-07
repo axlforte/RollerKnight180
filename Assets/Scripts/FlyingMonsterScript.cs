@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class FlyingMonsterScript : Enemy
 {
+    public bool frozen;
 
     public GameObject wherePlayerIsAt;
 
@@ -25,6 +26,9 @@ public class FlyingMonsterScript : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (frozen)
+        return;
+
         KeepLooking();
         Detect();
 
@@ -36,7 +40,7 @@ public class FlyingMonsterScript : Enemy
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6 )
+        if (other.gameObject.layer == 6)
         {
             health = health - playerReference.swordPower;
             StartCoroutine(BasicHit());
@@ -44,6 +48,10 @@ public class FlyingMonsterScript : Enemy
         else if (other.gameObject.layer == 7)
         {
             health--;
+        }
+        else if (other.gameObject.layer == 8)
+        {
+            StartCoroutine(Stunned());
         }
 
         if (other.GetComponent<HeroController>() && other.GetComponent<HeroController>().iAmInvincible == false)
@@ -69,5 +77,12 @@ public class FlyingMonsterScript : Enemy
         iAmInvincible = true;
         yield return new WaitForSeconds(invTime);
         iAmInvincible = false;
+    }
+
+    IEnumerator Stunned()
+    {
+        frozen = true;
+        yield return new WaitForSeconds(4);
+        frozen = false;
     }
 }
