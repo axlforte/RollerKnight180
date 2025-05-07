@@ -22,4 +22,12 @@ public class ArrowScript : MonoBehaviour
     {
         transform.Translate(new Vector3(0,0,0.66f));
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag != "Player")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
