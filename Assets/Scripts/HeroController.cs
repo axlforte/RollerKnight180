@@ -438,6 +438,12 @@ public class HeroController : MonoBehaviour
             health = Mathf.Clamp(health + other.GetComponent<HealthPickUp>().healthGiven, 0, maxHealth);
             Destroy(other.gameObject);
         }
+
+        if (other.GetComponent<MaxHealthPickUp>())
+        {
+            maxHealth = maxHealth + other.GetComponent<MaxHealthPickUp>().maxHealthGiven;
+            Destroy(other.gameObject);
+        }
     }
 
     void OnTriggerExit(Collider other)
