@@ -25,7 +25,7 @@ public class BoomerProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(0, 0, 0.5f));
+        transform.Translate(new Vector3(0, 0, 0.25f));
         if (rotateTowardsOwner)
         {
             RotTowardsTarget.transform.LookAt(owner.transform);
@@ -67,7 +67,7 @@ public class BoomerProjectile : MonoBehaviour
     IEnumerator rotate()
     {
         rotateTowardsOwner = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1);
         rotateTowardsOwner = true;
         owner = GameObject.Find("PlayerHandler");
     }

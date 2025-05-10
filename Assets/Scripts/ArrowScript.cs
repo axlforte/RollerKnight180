@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    bool death = false;
     void Start()
     {
         StartCoroutine(die());
@@ -20,14 +20,6 @@ public class ArrowScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3(0,0,0.66f));
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if(other.gameObject.tag != "Player")
-        {
-            Destroy(gameObject);
-        }
+        transform.Translate(new Vector3(0,0,0.33f));
     }
 }

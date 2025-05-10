@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactible: {fileID: 0}
+  hitEffect: {fileID: 5134456180677103398, guid: 22822b423c567154ca2ae8cb70e31104, type: 3}
 --- !u!1 &3784665223770268649
 GameObject:
   m_ObjectHideFlags: 0

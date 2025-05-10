@@ -52,6 +52,7 @@ public class HeroController : MonoBehaviour
     //public Sprite[] hearts;//the levels of health, from full heart to none;
    // public Image[] UIHearts;//the images on the HUD
     public TMP_Text healthGText;
+    public TMP_Text MoneyText;
 
     public bool iAmInvincible;
 
@@ -412,6 +413,7 @@ public class HeroController : MonoBehaviour
     private void UpdateHearts()
     {
         healthGText.text = health + "";
+        MoneyText.text = "X" + rubies;
     }
 
     //last minute change because of using fixedupdate

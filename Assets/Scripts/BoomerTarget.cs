@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoomerTarget : MonoBehaviour
 {
     public Interactible interactible;
+    public GameObject hitEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class BoomerTarget : MonoBehaviour
         if (other.GetComponent<BoomerProjectile>())
         {
             interactible.pinged = true;
+            Instantiate(hitEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

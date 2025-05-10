@@ -14,6 +14,8 @@ public class GroundEnemyScript : Enemy
 
     private HeroController playerReference;
 
+    public GameObject hitEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,7 @@ public class GroundEnemyScript : Enemy
     IEnumerator BasicHit()
     {
         iAmInvincible = true;
+        Instantiate(hitEffect, transform.position, transform.rotation);
         yield return new WaitForSeconds(invTime);
         iAmInvincible = false;
     }

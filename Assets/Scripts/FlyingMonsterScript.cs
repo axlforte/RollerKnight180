@@ -17,6 +17,9 @@ public class FlyingMonsterScript : Enemy
 
     private HeroController playerReference;
 
+    //davis added this. he thinks that seperating variables like the variables above is infuriating!
+    public GameObject hitEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +81,7 @@ public class FlyingMonsterScript : Enemy
     IEnumerator Stunned()
     {
         frozen = true;
+        Instantiate(hitEffect, transform.position, transform.rotation);
         yield return new WaitForSeconds(4);
         frozen = false;
     }
