@@ -23,6 +23,7 @@ public class BoomerTarget : MonoBehaviour
         if (other.GetComponent<BoomerProjectile>())
         {
             interactible.pinged = true;
+            Destroy(gameObject);
         }
     }
 }
