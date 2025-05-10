@@ -55,12 +55,25 @@ public class HeroController : MonoBehaviour
 
     public bool iAmInvincible;
 
+    [Header("Input Data")]//this section is going to suck. but I dont want to move away from fixedupdate because it requires shifting my mentality
+    // to using Time.deltaTime, which is unrealistic when im involved with another project that has a fixed update cycle.
+
+    //the gist - each input (that needs it) gets a new bool for pressed, held, and last held. 
+    // pressed == held && !pressed
+    // you can used held != lastHeld and !pressed to check if the key was just released
+
+    public int floof;//just to prevent funky header stuff
+    public bool BowPressed, BowHeld, BowLastHeld;
+    public bool BoomerPressed, BoomerHeld, BoomerLastHeld;
+    public bool JumpPressed, JumpHeld, JumpLastHeld;
+    public bool SwordPressed, SwordHeld, SwordLastHeld;
+    public bool LockPressed, LockHeld, LockLastHeld;
+    public bool InteractPressed, InteractHeld, InteractLastHeld;
+
     // Start is called before the first frame update
     void Start()
     {
         AimingReticle.SetActive(false);
-        //UIHearts[3].gameObject.SetActive(false);
-       // UIHearts[4].gameObject.SetActive(false);
     }
 
     /* too lazy to do time.deltatime
@@ -70,21 +83,32 @@ public class HeroController : MonoBehaviour
     */
     void FixedUpdate()
     {
+        //get the current state of the keys. only keys that I need to check are pressed/released, not just held
+        UpdateKeys();
+
         //you can only move around when you are grounded
         if (GetGrounded())
         {
             Jump();
         }
+        //if you want to lock on, find the nearest visible enemy and set the lock on target to that
         LockOntoEnemy();
+        //if you are pressing a move key, apply movement
         Move();
+        //check if you are in an interactible. if so, check if you can interact when you interact with it
         Interaction();
+        //move the camera to the appropriate position, also checks for collision, to prevent the camera from clipping out of bounds
         PositionCamera();
+        //check if the player wants to swing, and if so start swinging.
         swordSwing();
+        //this doesnt need to be a function anymore. all it does is set a string to the health value.
         UpdateHearts();
+        //if you have the bow, check for bow things
         if (gotBow)
         {
             Bow();
         }
+        //if you have the boomerang, check for boomerang things
         if(gotBoomer)
         {
             Boomerang();
@@ -263,7 +287,7 @@ public class HeroController : MonoBehaviour
     private void Jump()
     {
         //Debug.Log("i can jump!");
-        if (Input.GetKeyDown(Jumping))
+        if (JumpPressed)
         {
            // Debug.Log("jumped!");
             RB.AddForce(Vector3.up * jumpForce);
@@ -284,7 +308,7 @@ public class HeroController : MonoBehaviour
             Sword.gameObject.SetActive(false);
             swingTime--;
         }
-        else if (Input.GetKey(SwingSword))//istg i tried to make these readable
+        else if (SwordPressed)//istg i tried to make these readable
         {
             //Debug.Log("swing!");
             swingTime = swingMaxTime;
@@ -296,12 +320,12 @@ public class HeroController : MonoBehaviour
     //item1 is bow
     private void Bow()
     {
-        if (Input.GetKeyDown(Item1))
+        if (BowPressed)
         {
             Aiming = true;
             AimingReticle.SetActive(true);
         }
-        else if (Input.GetKeyUp(Item1))
+        else if (BowHeld != BowLastHeld)
         {
             Aiming = false;
             AimingReticle.SetActive(false);
@@ -315,12 +339,12 @@ public class HeroController : MonoBehaviour
     //item2 is boomerang
     private void Boomerang()
     {
-        if (Input.GetKeyDown(Item2))
+        if (BoomerPressed)
         {
             Aiming = true;
             AimingReticle.SetActive(true);
         }
-        else if (Input.GetKeyUp(Item2))
+        else if (BoomerHeld != BoomerLastHeld)
         {
             Aiming = false;
             AimingReticle.SetActive(false);
@@ -335,7 +359,7 @@ public class HeroController : MonoBehaviour
     //current method is ass, and does not work if you are in multiple interactible zones
     private void Interaction()
     {
-        if(inter != null && Input.GetKeyDown(Interact))
+        if(inter != null && InteractPressed)
         {
             if (inter.CanBePingedByPlayer) {
                 //door specific code, namely keys
@@ -353,9 +377,11 @@ public class HeroController : MonoBehaviour
         }
     }
 
+    //finds the nearest visible enemy, then sets lock on to said enemy.
+    //nothing about being locked onto an enemy is handled here. this is just attaching and detaching the lockon.
     private void LockOntoEnemy()
     {
-        if (Input.GetKeyDown(lockOn))
+        if (LockPressed)
         {
             if (LockOnTarget == null)
             {
@@ -381,9 +407,94 @@ public class HeroController : MonoBehaviour
         }
     }
 
+    //updates the number of health shown in the hud
+    //it was going to be much more complicated, but I couldnt find a satisfying way to just make it happen. 
     private void UpdateHearts()
     {
         healthGText.text = health + "";
+    }
+
+    //last minute change because of using fixedupdate
+    //basically, the GetKeyPressed could trigger between frames, because the framerate would be too fast compared to fixedupdate
+    //this new system relies solely on GetKey, so the pressed and released events should follow the fixedUpdate rate instead.
+    private void UpdateKeys()
+    {
+        //There is an easy way to make this simple: make a struct that contains the key to check, pressed, prevHeld, and held
+        //but Im lazy and dont remember how to make structs in C# so ill just settle for good ol copy pasting!
+
+        BowPressed = false;
+        BoomerPressed = false;
+        SwordPressed = false;
+        LockPressed = false;
+        JumpPressed = false;
+        InteractPressed = false;
+
+        BowLastHeld = BowHeld;
+        BoomerLastHeld = BoomerHeld;
+        SwordLastHeld = SwordHeld;
+        LockLastHeld = LockHeld;
+        InteractLastHeld = InteractHeld;
+        JumpLastHeld = JumpHeld;
+
+        if (Input.GetKey(Item1) && !BowHeld)
+        {
+            BowPressed = true;
+            BowHeld = true;
+        }
+        else if (!Input.GetKey(Item1))
+        {
+            BowHeld = false;
+        }
+
+        if (Input.GetKey(Item2) && !BoomerHeld)
+        {
+            BoomerPressed = true;
+            BoomerHeld = true;
+        }
+        else if (!Input.GetKey(Item2))
+        {
+            BoomerHeld = false;
+        }
+
+        if (Input.GetKey(SwingSword) && !SwordHeld)
+        {
+            SwordPressed = true;
+            SwordHeld = true;
+        }
+        else if (!Input.GetKey(SwingSword))
+        {
+            SwordHeld = false;
+        }
+
+        if (Input.GetKey(Jumping) && !JumpHeld)
+        {
+            JumpPressed = true;
+            JumpHeld = true;
+        }
+        else if (!Input.GetKey(Jumping))
+        {
+            JumpHeld = false;
+        }
+
+        if (Input.GetKey(Interact) && !InteractHeld)
+        {
+            InteractPressed = true;
+            InteractHeld = true;
+        }
+        else if (!Input.GetKey(Interact))
+        {
+            InteractHeld = false;
+        }
+
+        if (Input.GetKey(lockOn) && !LockHeld)
+        {
+            LockPressed = true;
+            LockHeld = true;
+        }
+        else if (!Input.GetKey(lockOn))
+        {
+            LockHeld = false;
+        }
     }
 
     //A helper function that converts booleans to integers. I dont know if casting works and i am too lazy to check
@@ -439,7 +550,7 @@ public class HeroController : MonoBehaviour
         }
     }
 
-
+    //alex made this. I, davis, prefer float based timers because I can use them to do things at certain intervals. 
     IEnumerator BasicHit()
     {
         iAmInvincible = true;

@@ -23,6 +23,7 @@ public class ArrowTarget : MonoBehaviour
         if (other.GetComponent<ArrowScript>())
         {
             interactible.pinged = true;
+            Destroy(gameObject);
         }
     }
 }
