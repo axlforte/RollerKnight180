@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  Alexander Lara
@@ -15,6 +16,7 @@ public class GroundEnemyScript : Enemy
     public float timeBetweenAttacks;
     public float beginDelay;
     public bool iAmInvincible;
+    public bool isBoss;
 
     public GameObject attackPrefab;
 
@@ -32,17 +34,27 @@ public class GroundEnemyScript : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
+        if (health <= 0 && isBoss == true)
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene("FinishScreen");
+        }
+        else if (health <= 0)
         {
             Destroy(gameObject);
         }
     }
 
+    /// <summary>
+    /// spawns and attack object on the enemies transform
+    /// </summary>
     public void SpawnAttack()
     {
         GameObject projectile = Instantiate(attackPrefab, transform.position, attackPrefab.transform.rotation);
     }
 
+
+    //checks if the layer object and if six or seven, remove health and play invincibiliy timer
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6 && iAmInvincible == false)
@@ -57,6 +69,7 @@ public class GroundEnemyScript : Enemy
         }
     }
 
+    //sets iAmInvincible to true then waits a set time before setting it back to false
     IEnumerator BasicHit()
     {
         iAmInvincible = true;
@@ -64,4 +77,5 @@ public class GroundEnemyScript : Enemy
         yield return new WaitForSeconds(invTime);
         iAmInvincible = false;
     }
+
 }

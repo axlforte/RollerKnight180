@@ -65,6 +65,7 @@ public class FlyingMonsterScript : Enemy
 
     }
 
+    //always rotate the transform so that it faces the player
     private void Detect()
     {
         if (Vector3.Distance(wherePlayerIsAt.transform.position, transform.position) <= detectionRange)
@@ -72,11 +73,13 @@ public class FlyingMonsterScript : Enemy
             agent.SetDestination(wherePlayerIsAt.transform.position);
         }
     }
+
     private void KeepLooking()
     {
         transform.LookAt(wherePlayerIsAt.transform);
     }
 
+    //sets iAmInvincible to true then waits a set time before setting it back to false
     IEnumerator BasicHit()
     {
         iAmInvincible = true;
@@ -84,6 +87,7 @@ public class FlyingMonsterScript : Enemy
         iAmInvincible = false;
     }
 
+    //freeze script then unfreezes after set time
     IEnumerator Stunned()
     {
         frozen = true;

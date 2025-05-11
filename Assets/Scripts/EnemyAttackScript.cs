@@ -26,6 +26,7 @@ public class EnemyAttackScript : Enemy
         transform.Rotate(0, rotateSpeed * Time.deltaTime,0);
     }
 
+    //wait for a set time then destroys self
     private IEnumerator AttackTimer()
     {
         yield return new WaitForSeconds(dangerTime);
