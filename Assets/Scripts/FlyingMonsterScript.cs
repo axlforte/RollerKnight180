@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/*
+ Alexander Lara
+ 5/10/25
+ looks at player and chases, dies when health is zero 
+ */
+
 public class FlyingMonsterScript : Enemy
 {
     public bool frozen;

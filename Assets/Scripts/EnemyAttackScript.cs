@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ Alexander Lara
+ 5/10/25
+ Spins the model for a small time before dissapearing 
+ */
+
 public class EnemyAttackScript : Enemy
 {
 

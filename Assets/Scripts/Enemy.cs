@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ Alexander Lara, Davis Williams
+ 5/10/25
+ Main script that holds general enemy variables
+ */
+
 public class Enemy : MonoBehaviour
 {
     public int health = 1;

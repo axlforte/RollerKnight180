@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/*
+ Alexander Lara
+ 5/10/25
+ Spawns an attack every second, dies if health drops to zero
+ */
+
 public class GroundEnemyScript : Enemy
 {
 

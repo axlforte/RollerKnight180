@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 /*
- Davis Williams
+ Davis Williams, Alexander Lara
 4/30/25
  makes the player perform all needed actions to complete a dungeon with a bow and boomerang. 
  */
