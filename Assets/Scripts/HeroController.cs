@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 /*
  Davis Williams, Alexander Lara
 4/30/25
@@ -82,6 +83,12 @@ public class HeroController : MonoBehaviour
        fixedupdate triggers at 50fps afaik, so its always
        being called in a fixed amount of time
     */
+
+    private void Update()
+    {
+        if (health <= 0)
+            SceneManager.LoadScene("GameOverScreen");
+    }
     void FixedUpdate()
     {
         //get the current state of the keys. only keys that I need to check are pressed/released, not just held
