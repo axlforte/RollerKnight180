@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
 {
-    bool death = false;
     void Start()
     {
         StartCoroutine(die());
