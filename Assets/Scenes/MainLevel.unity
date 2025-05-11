@@ -3141,10 +3141,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7635508667408627319, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 1786451832}
+      addedObject: {fileID: 1436408936}
     - targetCorrespondingSourceObject: {fileID: 7635508667408627319, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 1436408936}
+      addedObject: {fileID: 1786451832}
     - targetCorrespondingSourceObject: {fileID: 3688826535315275914, guid: a0a4aedbe22971e4da4b4ab9c8faceb1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 575230118}
@@ -12536,7 +12536,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786451831}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
